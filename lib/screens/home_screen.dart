@@ -7,7 +7,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(title: Text('Pagina Principal')),
       body: Center(
         child: Container(
-          height: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
