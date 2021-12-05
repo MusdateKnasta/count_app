@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('assets/images/sports_items.jpg'),
               GestureDetector(
                 onTap: () =>
                     Navigator.pushNamed(context, 'create', arguments: ''),
@@ -33,7 +34,8 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Text('Ver Historial'),
                 ),
-              )
+              ),
+              Image.asset('assets/images/sports.jpg'),
             ],
           ),
         ),

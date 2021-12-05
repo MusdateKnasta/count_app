@@ -7,7 +7,7 @@ class History extends StatelessWidget {
       appBar: AppBar(title: Text('Historial de Partidas')),
       body: Container(
         child: Center(
-          child: Text('Aqui va tu historial !!!'),
+          child: Text('Muy Pronto...'),
         ),
       ),
     );
