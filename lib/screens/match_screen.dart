@@ -49,57 +49,8 @@ class MatchScreen extends State<StateMatch> {
                 child: Scrollbar(
                     child: ListView.builder(
                         itemCount: 10,
-                        itemBuilder: (_, int idex) {
-                          return Container(
-                            height: 75,
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(
-                              color: Color.fromRGBO(255, 226, 104, 1),
-                              width: 2,
-                            ))),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.33,
-                                    child: Center(child: Text('Jugador'))),
-                                Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.33,
-                                    child: Center(child: Text('$counter'))),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.33,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FloatingActionButton(
-                                        backgroundColor:
-                                            Color.fromRGBO(255, 226, 104, 1),
-                                        foregroundColor: Colors.black,
-                                        onPressed: () {
-                                          _decreaseCounter();
-                                        },
-                                        child: Icon(Icons.remove),
-                                        mini: true,
-                                      ),
-                                      FloatingActionButton(
-                                        backgroundColor:
-                                            Color.fromRGBO(255, 226, 104, 1),
-                                        foregroundColor: Colors.black,
-                                        onPressed: () => {_incrementCounter()},
-                                        child: Icon(Icons.add),
-                                        mini: true,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        }))),
+                        itemBuilder: (_, int idex) => PlayerContainer(
+                            counter, _decreaseCounter, _incrementCounter)))),
             Container(
               child: Material(
                 color: Color.fromRGBO(52, 207, 191, 1),
@@ -124,5 +75,59 @@ class MatchScreen extends State<StateMatch> {
             ),
           ],
         ));
+  }
+}
+
+class PlayerContainer extends StatelessWidget {
+  PlayerContainer(this.counter, this._decreaseCounter, this._incrementCounter);
+  final int counter;
+  final _decreaseCounter;
+  final _incrementCounter;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 75,
+      decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+        color: Color.fromRGBO(255, 226, 104, 1),
+        width: 2,
+      ))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+              width: MediaQuery.of(context).size.width * 0.33,
+              child: Center(child: Text('Jugador'))),
+          Container(
+              width: MediaQuery.of(context).size.width * 0.33,
+              child: Center(child: Text('$counter'))),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.33,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  backgroundColor: Color.fromRGBO(255, 226, 104, 1),
+                  foregroundColor: Colors.black,
+                  onPressed: () {
+                    _decreaseCounter();
+                  },
+                  child: Icon(Icons.remove),
+                  mini: true,
+                ),
+                FloatingActionButton(
+                  backgroundColor: Color.fromRGBO(255, 226, 104, 1),
+                  foregroundColor: Colors.black,
+                  onPressed: () => {_incrementCounter()},
+                  child: Icon(Icons.add),
+                  mini: true,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

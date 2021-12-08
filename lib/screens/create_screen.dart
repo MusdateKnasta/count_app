@@ -14,12 +14,12 @@ class CreateScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [Box(), Box()],
+              children: [Box('Ping Pong'), Box('voleibol')],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [Box(), Box()],
+              children: [Box('Ajedrez'), Box('Paddel')],
             ),
           ],
         ),

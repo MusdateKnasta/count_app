@@ -8,32 +8,36 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset('assets/images/sports_items.jpg'),
-              GestureDetector(
-                onTap: () =>
-                    Navigator.pushNamed(context, 'create', arguments: ''),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Text('Crear Partida'),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => Navigator.pushNamed(context, 'selectTemplate',
-                    arguments: ''),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Text('Ver Plantillas'),
-                ),
-              ),
-              GestureDetector(
-                onTap: () =>
-                    Navigator.pushNamed(context, 'history', arguments: ''),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Text('Ver Historial'),
-                ),
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () =>
+                        Navigator.pushNamed(context, 'create', arguments: ''),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text('Crear Partida'),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, 'selectTemplate',
+                        arguments: ''),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text('Ver Plantillas'),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () =>
+                        Navigator.pushNamed(context, 'history', arguments: ''),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Text('Ver Historial'),
+                    ),
+                  ),
+                ],
               ),
               Image.asset('assets/images/sports.jpg'),
             ],

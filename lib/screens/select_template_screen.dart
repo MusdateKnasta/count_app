@@ -43,13 +43,13 @@ class SelectTemplate extends StatelessWidget {
                     ),
                   ),
                 ),
-                Box()
+                Box('Ping Pong')
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [Box(), Box()],
+              children: [Box('Ajedrez'), Box('Paddle')],
             ),
           ],
         ),

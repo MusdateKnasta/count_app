@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Box extends StatelessWidget {
+  Box(this.name);
+  final String name;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -13,7 +15,7 @@ class Box extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, 'nameTemplate', arguments: '');
         },
-        child: Text('Plantilla'),
+        child: Text(name),
       ),
     );
   }
