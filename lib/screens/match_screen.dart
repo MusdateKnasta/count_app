@@ -6,19 +6,6 @@ class StateMatch extends StatefulWidget {
 }
 
 class MatchScreen extends State<StateMatch> {
-  int counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      counter++;
-    });
-  }
-
-  void _decreaseCounter() {
-    setState(() {
-      counter--;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +36,7 @@ class MatchScreen extends State<StateMatch> {
                 child: Scrollbar(
                     child: ListView.builder(
                         itemCount: 10,
-                        itemBuilder: (_, int idex) => PlayerContainer(
-                            counter, _decreaseCounter, _incrementCounter)))),
+                        itemBuilder: (_, int idex) => PlayerContainer()))),
             Container(
               child: Material(
                 color: Color.fromRGBO(52, 207, 191, 1),
@@ -78,13 +64,26 @@ class MatchScreen extends State<StateMatch> {
   }
 }
 
-class PlayerContainer extends StatelessWidget {
-  PlayerContainer(this.counter, this._decreaseCounter, this._incrementCounter);
-  final int counter;
-  final _decreaseCounter;
-  final _incrementCounter;
+class PlayerContainer extends StatefulWidget {
+
+  @override
+  _PlayerContainerState createState() => _PlayerContainerState();
+}
+
+class _PlayerContainerState extends State<PlayerContainer> {
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
+    void _incrementCounter() {
+    setState(() {
+      this.counter++;
+    });
+  }
+  void _decreaseCounter() {
+    setState(() {
+      counter--;
+    });
+  }
     return Container(
       height: 75,
       decoration: BoxDecoration(
@@ -101,7 +100,7 @@ class PlayerContainer extends StatelessWidget {
               child: Center(child: Text('Jugador'))),
           Container(
               width: MediaQuery.of(context).size.width * 0.33,
-              child: Center(child: Text('$counter'))),
+              child: Center(child: Text('${this.counter}'))),
           Container(
             width: MediaQuery.of(context).size.width * 0.33,
             child: Row(
