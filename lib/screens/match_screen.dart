@@ -8,6 +8,8 @@ class StateMatch extends StatefulWidget {
 
 class MatchScreen extends State<StateMatch> {
   String _playersCount = '';
+  String _playerName = '';
+
   @override
   void initState() {
     super.initState();

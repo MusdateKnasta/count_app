@@ -14,7 +14,8 @@ class NameTempalteState extends State<NameTempalte> {
   DateTime? _myDateTime;
   String time = '';
   String _matchName = '';
-  String _playersCount = "1";
+  String _playersCount = "0";
+  String _playerName = '';
 
   @override
   void initState() {
@@ -25,13 +26,11 @@ class NameTempalteState extends State<NameTempalte> {
   cargarPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _matchName = prefs.getString('matchName') ?? "Nombre de la Partida";
-
     setState(() {});
   }
 
   _setMatchName(String? valor) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     await prefs.setString('matchName', valor ?? "Nombre de la Partida");
     _matchName = valor ?? "Nombre de la Partida";
     setState(() {});
@@ -39,9 +38,15 @@ class NameTempalteState extends State<NameTempalte> {
 
   _setPlayersCount(String? valor) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('playersCount', valor ?? "0");
+    _playersCount = valor ?? "0";
+    setState(() {});
+  }
 
-    await prefs.setString('playersCount', valor ?? "1");
-    _playersCount = valor ?? "1";
+  _setPlayerName(String? valor) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('playerName', valor ?? "Nombre del Jugador");
+    _playerName = valor ?? "Nombre del Jugador";
     setState(() {});
   }
 
@@ -138,26 +143,27 @@ class NameTempalteState extends State<NameTempalte> {
                         ],
                       ),
                     ),
+                    Container(
+                        height: MediaQuery.of(context).size.height * 0.385,
+                        child: Scrollbar(
+                            child: ListView.builder(
+                                itemCount: int.parse(_playersCount),
+                                itemBuilder: (_, int index) {
+                                  return TextFormField(
+                                      decoration: const InputDecoration(
+                                        border: UnderlineInputBorder(),
+                                        labelText: ('Nombre del jugador'),
+                                      ),
+                                      validator: (value) {
+                                        if (value != null && value.isEmpty) {
+                                          return 'Porfavor ingrese el nombre del jugador';
+                                        }
+                                      },
+                                      onChanged: _setPlayerName);
+                                })))
                   ],
                 ),
               )),
-          Container(
-              height: MediaQuery.of(context).size.height * 0.73,
-              child: Scrollbar(
-                  child: ListView.builder(
-                      itemCount: int.parse(_playersCount),
-                      itemBuilder: (_, int idex) {
-                        return TextFormField(
-                            decoration: const InputDecoration(
-                              border: UnderlineInputBorder(),
-                              labelText: 'Nombre del jugador',
-                            ),
-                            validator: (value) {
-                              if (value != null && value.isEmpty) {
-                                return 'Porfavor ingrese el nombre del jugador';
-                              }
-                            });
-                      }))),
           Container(
             child: Material(
               color: Color.fromRGBO(52, 207, 191, 1),
