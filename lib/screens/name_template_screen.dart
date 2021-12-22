@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NameTempalte extends StatefulWidget {
   @override
@@ -12,6 +13,37 @@ class NameTempalteState extends State<NameTempalte> {
   final _formKey = GlobalKey<FormState>();
   DateTime? _myDateTime;
   String time = '';
+  String _matchName = '';
+  String _playersCount = "1";
+
+  @override
+  void initState() {
+    super.initState();
+    cargarPref();
+  }
+
+  cargarPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _matchName = prefs.getString('matchName') ?? "Nombre de la Partida";
+
+    setState(() {});
+  }
+
+  _setMatchName(String? valor) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('matchName', valor ?? "Nombre de la Partida");
+    _matchName = valor ?? "Nombre de la Partida";
+    setState(() {});
+  }
+
+  _setPlayersCount(String? valor) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('playersCount', valor ?? "1");
+    _playersCount = valor ?? "1";
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +71,7 @@ class NameTempalteState extends State<NameTempalte> {
                           return 'Porfavor ingrese el nombre de la partida';
                         }
                       },
+                      onChanged: _setMatchName,
                     ),
                     TextFormField(
                       decoration: const InputDecoration(
@@ -62,6 +95,7 @@ class NameTempalteState extends State<NameTempalte> {
                           return 'Porfavor ingrese la cantidad de jugadores';
                         }
                       },
+                      onChanged: _setPlayersCount,
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 16),
@@ -107,6 +141,23 @@ class NameTempalteState extends State<NameTempalte> {
                   ],
                 ),
               )),
+          Container(
+              height: MediaQuery.of(context).size.height * 0.73,
+              child: Scrollbar(
+                  child: ListView.builder(
+                      itemCount: int.parse(_playersCount),
+                      itemBuilder: (_, int idex) {
+                        return TextFormField(
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Nombre del jugador',
+                            ),
+                            validator: (value) {
+                              if (value != null && value.isEmpty) {
+                                return 'Porfavor ingrese el nombre del jugador';
+                              }
+                            });
+                      }))),
           Container(
             child: Material(
               color: Color.fromRGBO(52, 207, 191, 1),

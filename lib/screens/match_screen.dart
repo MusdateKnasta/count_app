@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StateMatch extends StatefulWidget {
   @override
@@ -6,6 +7,19 @@ class StateMatch extends StatefulWidget {
 }
 
 class MatchScreen extends State<StateMatch> {
+  String _playersCount = '';
+  @override
+  void initState() {
+    super.initState();
+    cargarPref();
+  }
+
+  cargarPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _playersCount = prefs.getString('playersCount') ?? "1";
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +49,7 @@ class MatchScreen extends State<StateMatch> {
                 height: MediaQuery.of(context).size.height * 0.73,
                 child: Scrollbar(
                     child: ListView.builder(
-                        itemCount: 10,
+                        itemCount: int.parse(_playersCount),
                         itemBuilder: (_, int idex) => PlayerContainer()))),
             Container(
               child: Material(
@@ -65,7 +79,6 @@ class MatchScreen extends State<StateMatch> {
 }
 
 class PlayerContainer extends StatefulWidget {
-
   @override
   _PlayerContainerState createState() => _PlayerContainerState();
 }
@@ -75,15 +88,17 @@ class _PlayerContainerState extends State<PlayerContainer> {
   @override
   Widget build(BuildContext context) {
     void _incrementCounter() {
-    setState(() {
-      this.counter++;
-    });
-  }
-  void _decreaseCounter() {
-    setState(() {
-      counter--;
-    });
-  }
+      setState(() {
+        this.counter++;
+      });
+    }
+
+    void _decreaseCounter() {
+      setState(() {
+        counter--;
+      });
+    }
+
     return Container(
       height: 75,
       decoration: BoxDecoration(
